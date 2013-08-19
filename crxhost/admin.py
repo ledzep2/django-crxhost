@@ -3,7 +3,7 @@ from .models import *
 
 
 class CRXPackageAdmin(ModelAdmin):
-    list_display = ("active", "crx", "original_version", "generated_version", "timestamp")
+    list_display = ("active", "downloaded", "crx", "version", "timestamp")
     ordering = ("-id",)
 
 class CRXIdAdmin(ModelAdmin):

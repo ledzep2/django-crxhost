@@ -1,5 +1,6 @@
 import re, os, datetime
-from django.db.models import Max
+
+R = re.compile(r"(\d+\.\d+(\.\d+)*)")
 
 def break_filename(filename):
     filename = os.path.basename(filename)
@@ -8,11 +9,11 @@ def break_filename(filename):
 
     ret = {
         'crxname': filename,
-        'version': '1.0'
+        'version': ''
     }
-    pos = filename.rfind('-')
-    if pos > -1:
-        ret['crxname'] = filename[:pos]
-        ret['version'] = filename[pos+1:]
+    t = R.findall(filename)
+    if t:
+        ret['crxname'] = filename.replace(t[0], '').strip('-')
+        ret['version'] = t[0]
 
     return ret
